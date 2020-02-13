@@ -6,6 +6,8 @@ import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 @Entity
 public class Aluno implements Serializable {
@@ -15,18 +17,16 @@ public class Aluno implements Serializable {
     private String nome;
     private String telefone;
     private String email;
+    private Calendar dataDeCadastro = Calendar.getInstance();
 
-    @Ignore
-    public Aluno(String nome, String telefone, String email) {
-        this.nome = nome;
-        this.telefone = telefone;
-        this.email = email;
+
+    public Calendar getDataDeCadastro() {
+        return dataDeCadastro;
     }
 
-    public Aluno() {
-
+    public void setDataDeCadastro(Calendar dataDeCadastro) {
+        this.dataDeCadastro = dataDeCadastro;
     }
-
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -70,7 +70,5 @@ public class Aluno implements Serializable {
         return id > 0;
     }
 
-    public String getNomeCompleto() {
-        return nome ;
-    }
+
 }
