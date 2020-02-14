@@ -1,12 +1,10 @@
 package br.com.alura.agenda.model;
 
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 @Entity
@@ -15,25 +13,26 @@ public class Aluno implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id = 0;
     private String nome;
-    private String telefone;
+    private String telefoneFixo;
     private String email;
-    private Calendar dataDeCadastro = Calendar.getInstance();
+    private Calendar momentoDeCadastro = Calendar.getInstance();
+    private String telefoneCelular;
 
 
-    public Calendar getDataDeCadastro() {
-        return dataDeCadastro;
+    public Calendar getMomentoDeCadastro() {
+        return momentoDeCadastro;
     }
 
-    public void setDataDeCadastro(Calendar dataDeCadastro) {
-        this.dataDeCadastro = dataDeCadastro;
+    public void setMomentoDeCadastro(Calendar momentoDeCadastro) {
+        this.momentoDeCadastro = momentoDeCadastro;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setTelefoneFixo(String telefoneFixo) {
+        this.telefoneFixo = telefoneFixo;
     }
 
     public void setEmail(String email) {
@@ -44,8 +43,8 @@ public class Aluno implements Serializable {
         return nome;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getTelefoneFixo() {
+        return telefoneFixo;
     }
 
     public String getEmail() {
@@ -55,7 +54,7 @@ public class Aluno implements Serializable {
     @NonNull
     @Override
     public String toString() {
-        return nome + " - " + telefone;
+        return nome + " - " + telefoneFixo;
     }
 
     public void setId(int id) {
@@ -71,4 +70,11 @@ public class Aluno implements Serializable {
     }
 
 
+    public void setTelefoneCelular(String telefoneCelular) {
+        this.telefoneCelular = telefoneCelular;
+    }
+
+    public String getTelefoneCelular() {
+        return telefoneCelular;
+    }
 }
