@@ -10,13 +10,15 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import br.com.alura.agenda.database.conversor.ConversorCalenda;
+import br.com.alura.agenda.database.conversor.ConversorTelefone;
 import br.com.alura.agenda.database.dao.AlunoDao;
 import br.com.alura.agenda.model.Aluno;
+import br.com.alura.agenda.model.Telefone;
 
 import static br.com.alura.agenda.database.AgendaMigrations.TODAS_MIGRATION;
 
-@Database(entities = {Aluno.class}, version = 2,exportSchema = false)
-@TypeConverters({ConversorCalenda.class})
+@Database(entities = {Aluno.class, Telefone.class}, version = 6,exportSchema = false)
+@TypeConverters({ConversorCalenda.class, ConversorTelefone.class})
 public abstract class AgendaDatabase extends RoomDatabase {
 
     private static final String NOME_BANCO_DE_DADOS = "agenda.db";

@@ -49,7 +49,7 @@ class AgendaMigrations {
                     " SELECT id, nome, telefone, email,momentoDeCadastro FROM Aluno");
 
             database.execSQL("DROP TABLE Aluno");
-            
+
             database.execSQL("ALTER TABLE Aluno_novo RENAME TO Aluno");
         }
     };
