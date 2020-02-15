@@ -12,6 +12,7 @@ import android.support.annotation.NonNull;
 import br.com.alura.agenda.database.conversor.ConversorCalenda;
 import br.com.alura.agenda.database.conversor.ConversorTelefone;
 import br.com.alura.agenda.database.dao.AlunoDao;
+import br.com.alura.agenda.database.dao.TelefoneDao;
 import br.com.alura.agenda.model.Aluno;
 import br.com.alura.agenda.model.Telefone;
 
@@ -25,6 +26,7 @@ public abstract class AgendaDatabase extends RoomDatabase {
 
 
     public abstract AlunoDao getRoomAlunoDao();
+    public abstract TelefoneDao getTelefoneDao();
 
     public static AgendaDatabase getInstance(Context context) {
         return Room.
