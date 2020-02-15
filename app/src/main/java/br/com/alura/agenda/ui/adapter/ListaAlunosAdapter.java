@@ -45,17 +45,22 @@ public class ListaAlunosAdapter extends BaseAdapter {
     @Override
     public View getView(int posicao, View view, ViewGroup viewGroup) {
         View viewCriada = criaView(viewGroup);
-        Aluno alunoDevolvido = alunos.get(posicao);
-        vincula(viewCriada, alunoDevolvido);
+            Aluno alunoDevolvido = alunos.get(posicao);
+            vincula(viewCriada, alunoDevolvido);
+
+
         return viewCriada;
     }
 
     private void vincula(View view, Aluno aluno) {
-        TextView nome = view.findViewById(R.id.item_aluno_nome);
-        nome.setText(aluno.getNome());
-        TextView telefone = view.findViewById(R.id.item_aluno_telefone);
-        Telefone primeiroTelefone = dao.buscaPrimeiroTelefoneDoAluno(aluno.getId());
-        telefone.setText(primeiroTelefone.getNumero());
+        if(aluno != null) {
+            TextView nome = view.findViewById(R.id.item_aluno_nome);
+            nome.setText(aluno.getNome());
+            TextView telefone = view.findViewById(R.id.item_aluno_telefone);
+            Telefone primeiroTelefone = dao.buscaPrimeiroTelefoneDoAluno(aluno.getId());
+            telefone.setText(primeiroTelefone.getNumero());
+        }
+
     }
 
     private View criaView(ViewGroup viewGroup) {

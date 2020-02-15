@@ -10,7 +10,10 @@ import android.widget.EditText;
 import br.com.alura.agenda.R;
 import br.com.alura.agenda.database.AgendaDatabase;
 import br.com.alura.agenda.database.dao.AlunoDao;
+import br.com.alura.agenda.database.dao.TelefoneDao;
 import br.com.alura.agenda.model.Aluno;
+import br.com.alura.agenda.model.Telefone;
+import br.com.alura.agenda.model.TipoTelefone;
 
 import static br.com.alura.agenda.ui.activity.ConstantesActivities.CHAVE_ALUNO;
 
@@ -22,14 +25,17 @@ public class FormularioAlunoActivity extends AppCompatActivity {
     private EditText campoTelefoneFixo;
     private EditText campoTelefoneCelular;
     private EditText campoEmail;
-    private AlunoDao dao;
+    private AlunoDao alunoDao;
+    private TelefoneDao telefoneDao;
     private Aluno aluno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_aluno);
-        dao = AgendaDatabase.getInstance(this).getRoomAlunoDao();
+        AgendaDatabase database =  AgendaDatabase.getInstance(this);
+        alunoDao =database.getRoomAlunoDao();
+        telefoneDao = database.getTelefoneDao();
         inicializacaoDosCampos();
         carregaAluno();
     }
@@ -72,9 +78,16 @@ public class FormularioAlunoActivity extends AppCompatActivity {
     private void finalizaFormulario() {
         preencheAluno();
         if (aluno.temIdValido()) {
-            dao.edita(aluno);
+            alunoDao.edita(aluno);
         } else {
-            dao.salva(aluno);
+            int alunoId = alunoDao.salva(aluno).intValue();
+            String numeroFixo = campoTelefoneFixo.getText().toString();
+            Telefone telefoneFixo = new Telefone(numeroFixo, TipoTelefone.FIXO, alunoId);
+            String numeroCelular = campoTelefoneCelular.getText().toString();
+            Telefone telefoneCelular = new Telefone(numeroCelular, TipoTelefone.CELULAR, alunoId);
+            telefoneDao.salvaTelefone(telefoneFixo, telefoneCelular);
+
+
         }
         finish();
     }
